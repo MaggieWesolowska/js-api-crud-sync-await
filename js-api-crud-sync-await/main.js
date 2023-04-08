@@ -1,24 +1,24 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import "./style.css";
+import ApiPosts from "./js/api/posts";
+import Dom from "./js/utils/dom";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const addPostForm = Dom.qs("#addPostForm");
 
-setupCounter(document.querySelector('#counter'))
+// Fetch data when App starts
+ApiPosts.getPosts();
+
+// EVENTS
+addPostForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const { title, body } = e.currentTarget.elements;
+
+  const newPost = {
+    title: title.value,
+    body: body.value,
+    userId: 1,
+    isEdited: false,
+  };
+
+  ApiPosts.addPost(newPost);
+});
