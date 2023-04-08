@@ -2,7 +2,7 @@ import View from "./../view";
 import Store from "./../store";
 
 // GET - READ - 200 OK
-const getPosts = async (limit = 3) => {
+const getPosts = async (limit = 5) => {
   try {
     // SUCCESS (Promise: fulfilled)
     const url = `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`;
